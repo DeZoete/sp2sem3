@@ -33,11 +33,12 @@ public class Populate {
             em.persist(zoo2);
 
             // Link Animals to Zoos
-            zoo1Animals.forEach(animal -> animal.setZoo(zoo1));
-            zoo2Animals.forEach(animal -> animal.setZoo(zoo2));
+            //har udkommenteret for at få build til at fungere
+            //zoo1Animals.forEach(animal -> animal.setZoo(zoo1));
+            //zoo2Animals.forEach(animal -> animal.setZoo(zoo2));
 
-            zoo1.setAnimals(zoo1Animals);
-            zoo2.setAnimals(zoo2Animals);
+           // zoo1.setAnimals(zoo1Animals);
+            //zoo2.setAnimals(zoo2Animals);
 
             zoo1Animals.forEach(em::persist);
             zoo2Animals.forEach(em::persist);
