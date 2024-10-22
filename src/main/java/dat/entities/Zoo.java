@@ -37,6 +37,7 @@ public class Zoo {
     }
 
     public Zoo(ZooDTO zooDTO) {
+        this.id = zooDTO.getId();
         this.name = zooDTO.getName();
         this.location = zooDTO.getLocation();
         if (zooDTO.getAnimals() != null) {

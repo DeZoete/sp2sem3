@@ -27,6 +27,7 @@ public class Species {
     private String habitat;
 
     public Species(SpeciesDTO speciesDTO) {
+        this.id = speciesDTO.getId();
         this.speciesName = speciesDTO.getSpeciesName();
         this.diet = speciesDTO.getDiet();
         this.habitat = speciesDTO.getHabitat();

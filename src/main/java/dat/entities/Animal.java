@@ -35,6 +35,7 @@ public class Animal {
     }
 
     public Animal(AnimalDTO animalDTO) {
+        this.id = animalDTO.getId();
         this.speciesId = animalDTO.getSpeciesId();
         this.zoo = animalDTO.getZoo();
         this.name = animalDTO.getName();
