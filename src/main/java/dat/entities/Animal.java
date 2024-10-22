@@ -26,8 +26,7 @@ public class Animal {
     @Column
     private int age;
 
-    public Animal(int id, int speciesId, Zoo zoo, String name, int age) {
-        this.id = id;
+    public Animal(int speciesId, Zoo zoo, String name, int age) {
         this.speciesId = speciesId;
         this.zoo = zoo;
         this.name = name;
