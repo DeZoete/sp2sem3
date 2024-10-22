@@ -47,9 +47,9 @@ public class Populate {
 
     @NotNull
     private static Set<Animal> getZoo1Animals(Zoo zoo, Species lion, Species tiger, Species elephant) {
-        Animal a1 = new Animal(1, lion, zoo, "Lion 1", 5);
-        Animal a2 = new Animal(2, tiger, zoo, "Tiger 1", 3);
-        Animal a3 = new Animal(3, elephant, zoo, "Elephant 1", 10);
+        Animal a1 = new Animal(lion.getId(), zoo, "Lion 1", 5);
+        Animal a2 = new Animal(tiger.getId(), zoo, "Tiger 1", 3);
+        Animal a3 = new Animal(elephant.getId(), zoo, "Elephant 1", 10);
 
         Animal[] animalArray = {a1, a2, a3};
         return Set.of(animalArray);
@@ -57,9 +57,9 @@ public class Populate {
 
     @NotNull
     private static Set<Animal> getZoo2Animals(Zoo zoo, Species lion, Species tiger, Species elephant) {
-        Animal a4 = new Animal(4, lion, zoo, "Lion 2", 7);
-        Animal a5 = new Animal(5, tiger, zoo, "Tiger 2", 4);
-        Animal a6 = new Animal(6, elephant, zoo, "Elephant 2", 2);
+        Animal a4 = new Animal(lion.getId(), zoo, "Lion 2", 7);
+        Animal a5 = new Animal(tiger.getId(), zoo, "Tiger 2", 4);
+        Animal a6 = new Animal(elephant.getId(), zoo, "Elephant 2", 2);
 
         Animal[] animalArray = {a4, a5, a6};
         return Set.of(animalArray);
