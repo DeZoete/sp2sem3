@@ -26,7 +26,7 @@ public class Zoo {
     @Setter
     private String location;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @Setter
     private List<Animal> animals;
 
