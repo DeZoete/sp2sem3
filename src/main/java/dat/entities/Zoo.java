@@ -1,6 +1,5 @@
 package dat.entities;
 
-import dat.dtos.AnimalDTO;
 import dat.dtos.ZooDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -30,10 +29,10 @@ public class Zoo {
     @Setter
     private List<Animal> animals;
 
-    public Zoo(String name, String location, List<Animal> animals) {
+    public Zoo(String name, String location) {
         this.name = name;
         this.location = location;
-        this.animals = animals;
+        this.animals = null;
     }
 
     public Zoo(ZooDTO zooDTO) {

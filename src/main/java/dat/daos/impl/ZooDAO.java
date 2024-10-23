@@ -1,5 +1,6 @@
-package dat.daos;
+package dat.daos.impl;
 
+import dat.daos.IDAO;
 import dat.dtos.ZooDTO;
 import dat.entities.Zoo;
 import jakarta.persistence.EntityManager;
@@ -8,7 +9,7 @@ import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
-public class ZooDAO {
+public class ZooDAO implements IDAO<ZooDTO, Integer> {
 
     private static ZooDAO instance;
     private static EntityManagerFactory emf;

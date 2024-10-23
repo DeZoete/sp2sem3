@@ -8,9 +8,9 @@ import lombok.Setter;
 
 @Getter
 @Entity
+@Table(name = "users")
 @NoArgsConstructor
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

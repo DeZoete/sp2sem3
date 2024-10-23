@@ -1,17 +1,16 @@
-package dat.daos;
+package dat.daos.impl;
 
+import dat.daos.IDAO;
 import dat.dtos.AnimalDTO;
 import dat.entities.Animal;
 import dat.entities.Zoo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-public class AnimalDAO {
+public class AnimalDAO implements IDAO<AnimalDTO, Integer> {
 
     private static AnimalDAO instance;
 

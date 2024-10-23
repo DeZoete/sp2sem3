@@ -2,6 +2,7 @@ package dat.dtos;
 
 import dat.entities.Zoo;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class ZooDTO {
     private int id;
     private String name;
@@ -22,10 +24,9 @@ public class ZooDTO {
         this.animals = zoo.getAnimals().stream().map(AnimalDTO::new).collect(Collectors.toList());
     }
 
-    public ZooDTO(String name, String location, List<AnimalDTO> animals) {
+    public ZooDTO(String name, String location) {
         this.name = name;
         this.location = location;
-        this.animals = animals;
     }
 
     public static List<ZooDTO> toZooDTOList(List<Zoo> zooList) {

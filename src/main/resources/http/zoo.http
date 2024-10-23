@@ -1,0 +1,13 @@
+// Zoo
+
+GET http://localhost:7070/api/v1/zoos
+
+###
+
+POST http://localhost:7070/api/v1/zoos
+Content-Type: application/json
+
+{
+  "name": "Roskilde Zoo",
+  "location": "Roskildevej 32"
+}

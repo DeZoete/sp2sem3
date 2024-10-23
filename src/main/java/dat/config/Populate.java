@@ -14,8 +14,8 @@ public class Populate {
     private static List<Animal> zoo1Animals = getZoo1Animals().stream().collect(Collectors.toList());
     private static List<Animal> zoo2Animals = getZoo2Animals().stream().collect(Collectors.toList());
 
-    private static Zoo zoo1 = new Zoo("Zoo 1", "Location 1", zoo1Animals);
-    private static Zoo zoo2 = new Zoo("Zoo 2", "Location 2", zoo2Animals);
+    private static Zoo zoo1 = new Zoo("Zoo 1", "Location 1");
+    private static Zoo zoo2 = new Zoo("Zoo 2", "Location 2");
    private static Species lion = new Species("Lion", "Carnivore", "Savannah");
    private static Species tiger = new Species("Tiger", "Carnivore", "Forest");
    private static Species elephant = new Species("Elephant", "Herbivore", "Savannah");

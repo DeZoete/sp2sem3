@@ -1,7 +1,7 @@
 package dat.controllers.impl;
 
 import dat.controllers.IController;
-import dat.daos.SpeciesDAO;
+import dat.daos.impl.SpeciesDAO;
 import dat.dtos.SpeciesDTO;
 import io.javalin.http.Context;
 
