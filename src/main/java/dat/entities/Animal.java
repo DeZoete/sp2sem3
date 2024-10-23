@@ -42,7 +42,7 @@ public class Animal {
     }
 
     public Animal(AnimalDTO animalDTO) {
-        this.animalId = animalDTO.getId();
+        this.animalId = animalDTO.getAnimalId();
         this.animalName = animalDTO.getAnimalName();
         this.animalAge = animalDTO.getAnimalAge();
     }

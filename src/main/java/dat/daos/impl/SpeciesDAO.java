@@ -81,6 +81,7 @@ public class SpeciesDAO implements IDAO<SpeciesDTO, Integer> {
             return query.getResultList(); // Returning the list of AnimalDTOs
         }
     }
+    /*
     public Zoo getZooBySpeciesId(Integer speciesId) {
         try (EntityManager em = emf.createEntityManager()) {
             // Retrieve the species by its ID
@@ -89,7 +90,7 @@ public class SpeciesDAO implements IDAO<SpeciesDTO, Integer> {
             return species != null ? species.getZoo() : null; // Change to species.getZoo() for Zoo object
         }
     }
-
+*/
     public boolean validatePrimaryKey(Integer id) {
         try (EntityManager em = emf.createEntityManager()) {
             Species species = em.find(Species.class, id);

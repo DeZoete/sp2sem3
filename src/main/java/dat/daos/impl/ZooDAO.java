@@ -50,8 +50,8 @@ public class ZooDAO implements IDAO<ZooDTO, Integer> {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
             Zoo zoo = em.find(Zoo.class, id);
-            zoo.setName(zooDTO.getName());
-            zoo.setLocation(zooDTO.getLocation());
+            zoo.setZooName(zooDTO.getZooName());
+            zoo.setZooLocation(zooDTO.getZooLocation());
             Zoo mergedZoo = em.merge(zoo);
             em.getTransaction().commit();
             return mergedZoo != null ? new ZooDTO(mergedZoo) : null;

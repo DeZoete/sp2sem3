@@ -8,6 +8,6 @@ POST http://localhost:7070/api/v1/zoos
 Content-Type: application/json
 
 {
-  "name": "Roskilde Zoo",
-  "location": "Roskildevej 32"
+  "zooName": "Roskilde Zoo",
+  "zooLocation": "Roskildevej 32"
 }

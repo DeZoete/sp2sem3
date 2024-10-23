@@ -10,8 +10,8 @@ import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
-public class AnimalDAO implements IDAO<AnimalDTO, Integer> {
-
+public class AnimalDAO {
+/*
     private static AnimalDAO instance;
 
         private static EntityManagerFactory emf;
@@ -49,20 +49,26 @@ public class AnimalDAO implements IDAO<AnimalDTO, Integer> {
             }
         }
 
+    @Override
+    public AnimalDTO update(Integer integer, AnimalDTO animalDTO) {
+        return null;
+    }
 
-        public AnimalDTO update(Integer integer, AnimalDTO AnimalDTO) {
-            try (EntityManager em = emf.createEntityManager()) {
-                em.getTransaction().begin();
-                Animal h = em.find(Animal.class, integer);
-                h.setSpeciesId(AnimalDTO.getSpeciesId());
-                h.setAge(AnimalDTO.getAge());
-                h.setName(AnimalDTO.getName());
-                Animal mergedAnimal = em.merge(h);
-                em.getTransaction().commit();
-                return mergedAnimal != null ? new AnimalDTO(mergedAnimal) : null;
+
+
+            public AnimalDTO update(Integer integer, AnimalDTO AnimalDTO) {
+                try (EntityManager em = emf.createEntityManager()) {
+                    em.getTransaction().begin();
+                    Animal h = em.find(Animal.class, integer);
+                    h.setSpeciesId(AnimalDTO.getSpeciesId());
+                    h.setAge(AnimalDTO.getAge());
+                    h.setName(AnimalDTO.getName());
+                    Animal mergedAnimal = em.merge(h);
+                    em.getTransaction().commit();
+                    return mergedAnimal != null ? new AnimalDTO(mergedAnimal) : null;
+                }
+
             }
-
-        }
 
 
         public void delete(Integer integer) {
@@ -100,4 +106,5 @@ public class AnimalDAO implements IDAO<AnimalDTO, Integer> {
                 return Animal != null;
             }
         }
+        */
 }
