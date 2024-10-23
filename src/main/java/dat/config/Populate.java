@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Populate {
+    /*
     private static List<Animal> zoo1Animals = getZoo1Animals().stream().collect(Collectors.toList());
     private static List<Animal> zoo2Animals = getZoo2Animals().stream().collect(Collectors.toList());
 
@@ -75,4 +76,6 @@ public class Populate {
         Animal[] animalArray = {a6, a7, a8, a9, a10};
         return Set.of(animalArray);
     }
+    */
+
 }
