@@ -40,4 +40,8 @@ public class Animal {
         this.name = animalDTO.getName();
         this.age = animalDTO.getAge();
     }
+
+    public int getSpeciesId() {
+        return speciesId;
+    }
 }

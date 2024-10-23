@@ -22,9 +22,14 @@ public class Species {
     @Setter
     private String diet;
 
+
     @Column
     @Setter
     private String habitat;
+
+    @ManyToOne
+    @Setter
+    private Zoo zoo;
 
     public Species(SpeciesDTO speciesDTO) {
         this.id = speciesDTO.getId();
@@ -37,5 +42,6 @@ public class Species {
         this.speciesName = speciesName;
         this.diet = diet;
         this.habitat = habitat;
+        this.zoo = zoo;
     }
 }

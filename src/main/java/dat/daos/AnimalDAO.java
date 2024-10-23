@@ -2,6 +2,7 @@ package dat.daos;
 
 import dat.dtos.AnimalDTO;
 import dat.entities.Animal;
+import dat.entities.Zoo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
@@ -75,6 +76,24 @@ public class AnimalDAO {
                 em.getTransaction().commit();
             }
         }
+    public AnimalDTO readById(Integer id) {
+        try (EntityManager em = emf.createEntityManager()) {
+            Animal animal = em.find(Animal.class, id); // Retrieve the animal
+            return animal != null ? new AnimalDTO(animal) : null;
+        }
+    }
+    public Integer getSpeciesByAnimalId(Integer animalId) {
+        try (EntityManager em = emf.createEntityManager()) {
+            Animal animal = em.find(Animal.class, animalId); // Retrieve the animal
+            return animal != null ? animal.getSpeciesId() : null; // Return the species ID instead of Species object
+        }
+    }
+    public Zoo getZooByAnimalId(Integer animalId) {
+        try (EntityManager em = emf.createEntityManager()) {
+            Animal animal = em.find(Animal.class, animalId); // Retrieve the animal
+            return animal != null ? animal.getZoo() : null; // Return the Zoo object or null if not found
+        }
+    }
 
         public boolean validatePrimaryKey(Integer integer) {
             try (EntityManager em = emf.createEntityManager()) {
