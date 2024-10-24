@@ -25,10 +25,6 @@ public class SpeciesDTO {
         this.speciesName = species.getSpeciesName();
         this.diet = species.getDiet();
         this.habitat = species.getHabitat();
-        if (species.getAnimals() != null)
-        {
-            species.getAnimals().forEach( animal -> animals.add(new AnimalDTO(animal)));
-        }
     }
 
     public SpeciesDTO(String speciesName, String diet, String habitat) {

@@ -31,3 +31,9 @@ Content-Type: application/json
 DELETE http://localhost:7070/api/v1/zoos/1
 
 ###
+
+GET http://localhost:7070/api/v1/zoos/1/animals
+
+###
+
+GET http://localhost:7070/api/v1/zoos/1/species

@@ -26,19 +26,23 @@ public class Animal {
     private int animalAge;
 
     @Setter
+    @Column(name = "species_id", nullable = false)
+    private int speciesId;
+
+    @Setter
     @ManyToOne
     @JoinColumn(name = "zoo_id", nullable = false)
     private Zoo zoo;
 
-    @Setter
-    @ManyToOne
-    @JoinColumn(name = "species_id", nullable = false)
-    private Species species;
-
-
     public Animal(String animalName, int animalAge) {
         this.animalName = animalName;
         this.animalAge = animalAge;
+    }
+
+    public Animal(String animalName, int animalAge, int speciesId) {
+        this.animalName = animalName;
+        this.animalAge = animalAge;
+        this.speciesId = speciesId;
     }
 
     public Animal(AnimalDTO animalDTO) {
