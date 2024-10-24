@@ -18,7 +18,7 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:7070/api/v1/zoos/1
+PUT http://localhost:7070/api/v1/zoos/2
 Content-Type: application/json
 
 {

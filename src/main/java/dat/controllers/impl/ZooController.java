@@ -79,6 +79,9 @@ public class ZooController implements IController<ZooDTO, Integer> {
 
     @Override
     public ZooDTO validateEntity(Context ctx) {
-        return null;
+        return ctx.bodyValidator(ZooDTO.class)
+                .check( z -> z.getZooName() != null && !z.getZooName().isEmpty(), "Zoo name must be set")
+                .check( z -> z.getZooLocation() != null && !z.getZooLocation().isEmpty(), "Zoo location must be set")
+                .get();
     }
 }

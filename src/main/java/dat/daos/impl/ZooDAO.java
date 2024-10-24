@@ -46,15 +46,16 @@ public class ZooDAO implements IDAO<ZooDTO, Integer> {
         }
     }
 
-    public ZooDTO update(Integer id, ZooDTO zooDTO) {
+    public ZooDTO update(Integer id, ZooDTO zooDTO){
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
             Zoo zoo = em.find(Zoo.class, id);
-            zoo.setZooName(zooDTO.getZooName());
-            zoo.setZooLocation(zooDTO.getZooLocation());
-            Zoo mergedZoo = em.merge(zoo);
+            if (zoo != null) {
+                zoo.setZooName(zooDTO.getZooName());
+                zoo.setZooLocation(zooDTO.getZooLocation());
+            }
             em.getTransaction().commit();
-            return mergedZoo != null ? new ZooDTO(mergedZoo) : null;
+            return new ZooDTO(zoo);
         }
     }
 
