@@ -93,10 +93,12 @@ public class ZooDAO implements IDAO<ZooDTO, Integer> {
         try (EntityManager em = emf.createEntityManager()) {
             TypedQuery<SpeciesDTO> query = em.createQuery(
                     "SELECT DISTINCT new dat.dtos.SpeciesDTO(s) " +
-                            "FROM Species s JOIN s.animals a " +
-                            "WHERE a.zoo.id = :zooId", SpeciesDTO.class);
+                            "FROM Species s " +
+                            "WHERE s.speciesId IN (SELECT a.speciesId FROM Animal a WHERE a.zoo.id = :zooId)", SpeciesDTO.class);
             query.setParameter("zooId", id);
             return query.getResultList();
         }
     }
+
+
 }

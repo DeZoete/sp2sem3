@@ -36,4 +36,4 @@ GET http://localhost:7070/api/v1/zoos/1/animals
 
 ###
 
-GET http://localhost:7070/api/v1/zoos/1/species
+GET http://localhost:7070/api/v1/zoos/2/species
