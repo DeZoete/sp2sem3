@@ -2,7 +2,9 @@ package dat.daos.impl;
 
 import dat.daos.IDAO;
 import dat.dtos.AnimalDTO;
+import dat.dtos.SpeciesDTO;
 import dat.entities.Animal;
+import dat.entities.Species;
 import dat.entities.Zoo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -11,7 +13,7 @@ import jakarta.persistence.TypedQuery;
 import java.util.List;
 
 public class AnimalDAO {
-/*
+
     private static AnimalDAO instance;
 
         private static EntityManagerFactory emf;
@@ -49,10 +51,6 @@ public class AnimalDAO {
             }
         }
 
-    @Override
-    public AnimalDTO update(Integer integer, AnimalDTO animalDTO) {
-        return null;
-    }
 
 
 
@@ -60,15 +58,14 @@ public class AnimalDAO {
                 try (EntityManager em = emf.createEntityManager()) {
                     em.getTransaction().begin();
                     Animal h = em.find(Animal.class, integer);
-                    h.setSpeciesId(AnimalDTO.getSpeciesId());
-                    h.setAge(AnimalDTO.getAge());
-                    h.setName(AnimalDTO.getName());
+                    h.setAnimalAge(AnimalDTO.getAnimalAge());
+                    h.setAnimalName(AnimalDTO.getAnimalName());
                     Animal mergedAnimal = em.merge(h);
                     em.getTransaction().commit();
                     return mergedAnimal != null ? new AnimalDTO(mergedAnimal) : null;
                 }
-
             }
+
 
 
         public void delete(Integer integer) {
@@ -87,12 +84,7 @@ public class AnimalDAO {
             return animal != null ? new AnimalDTO(animal) : null;
         }
     }
-    public Integer getSpeciesByAnimalId(Integer animalId) {
-        try (EntityManager em = emf.createEntityManager()) {
-            Animal animal = em.find(Animal.class, animalId); // Retrieve the animal
-            return animal != null ? animal.getSpeciesId() : null; // Return the species ID instead of Species object
-        }
-    }
+
     public Zoo getZooByAnimalId(Integer animalId) {
         try (EntityManager em = emf.createEntityManager()) {
             Animal animal = em.find(Animal.class, animalId); // Retrieve the animal
@@ -106,5 +98,5 @@ public class AnimalDAO {
                 return Animal != null;
             }
         }
-        */
+
 }
