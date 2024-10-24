@@ -3,11 +3,14 @@ package dat.controllers.impl;
 import dat.config.HibernateConfig;
 import dat.controllers.IController;
 import dat.daos.impl.ZooDAO;
+import dat.dtos.AnimalDTO;
+import dat.dtos.SpeciesDTO;
 import dat.dtos.ZooDTO;
 import dat.entities.Zoo;
 import dat.exceptions.Message;
 import io.javalin.http.Context;
 import jakarta.persistence.EntityManagerFactory;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -83,5 +86,25 @@ public class ZooController implements IController<ZooDTO, Integer> {
                 .check( z -> z.getZooName() != null && !z.getZooName().isEmpty(), "Zoo name must be set")
                 .check( z -> z.getZooLocation() != null && !z.getZooLocation().isEmpty(), "Zoo location must be set")
                 .get();
+    }
+
+    public void readAllAnimals(Context ctx) {
+        // request
+        int id = ctx.pathParamAsClass("id", Integer.class).check(this::validatePrimaryKey, "Not a valid id").get();
+        // entity
+        List<AnimalDTO> animalDTOS = dao.readAllAnimals(id);
+        // response
+        ctx.res().setStatus(200);
+        ctx.json(animalDTOS, AnimalDTO.class);
+    }
+
+    public void readAllSpecies(Context ctx) {
+        // request
+        int id = ctx.pathParamAsClass("id", Integer.class).check(this::validatePrimaryKey, "Not a valid id").get();
+        // entity
+        List<SpeciesDTO> species = dao.readAllSpecies(id);
+        // response
+        ctx.res().setStatus(200);
+        ctx.json(species);
     }
 }

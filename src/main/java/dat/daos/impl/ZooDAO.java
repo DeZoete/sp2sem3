@@ -1,12 +1,16 @@
 package dat.daos.impl;
 
 import dat.daos.IDAO;
+import dat.dtos.AnimalDTO;
+import dat.dtos.SpeciesDTO;
 import dat.dtos.ZooDTO;
+import dat.entities.Species;
 import dat.entities.Zoo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ZooDAO implements IDAO<ZooDTO, Integer> {
@@ -74,6 +78,25 @@ public class ZooDAO implements IDAO<ZooDTO, Integer> {
         try (EntityManager em = emf.createEntityManager()) {
             Zoo zoo = em.find(Zoo.class, id);
             return zoo != null;
+        }
+    }
+
+    public List<AnimalDTO> readAllAnimals(Integer id) {
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<AnimalDTO> query = em.createQuery("SELECT new dat.dtos.AnimalDTO(a) FROM Animal a WHERE a.zoo.id = :zooId", AnimalDTO.class);
+            query.setParameter("zooId", id);
+            return query.getResultList();
+        }
+    }
+
+    public List<SpeciesDTO> readAllSpecies(Integer id) {
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<SpeciesDTO> query = em.createQuery(
+                    "SELECT DISTINCT new dat.dtos.SpeciesDTO(s) " +
+                            "FROM Species s JOIN s.animals a " +
+                            "WHERE a.zoo.id = :zooId", SpeciesDTO.class);
+            query.setParameter("zooId", id);
+            return query.getResultList();
         }
     }
 }
