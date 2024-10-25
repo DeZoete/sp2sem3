@@ -22,10 +22,10 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class RoomRouteTest {
+class AnimalRouteTest {
     private static Javalin app;
     private static EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryForTest();
-    private static String BASE_URL = "http://localhost:7z070/api/v1";
+    private static String BASE_URL = "http://localhost:7070/api/v1";
     private static AnimalDAO animalDAO = new AnimalDAO();
     private Animal a1, a2, a3;
     private AnimalDTO a1DTO, a2DTO, a3DTO;
