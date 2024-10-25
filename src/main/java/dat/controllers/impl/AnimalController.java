@@ -13,6 +13,7 @@ import java.util.List;
 
 public class AnimalController implements IController<AnimalDTO, Integer> {
     private AnimalDAO animalDAO;
+
     @Override
     public void read(Context ctx) {
         int id = ctx.pathParamAsClass("id", Integer.class).check(this::validatePrimaryKey, "Not a valid id").get();
@@ -27,7 +28,6 @@ public class AnimalController implements IController<AnimalDTO, Integer> {
         ctx.res().setStatus(200);  // Set response status
         ctx.json(animals, AnimalDTO.class);  // Send response as JSON
     }
-
 
 
     @Override
@@ -49,17 +49,25 @@ public class AnimalController implements IController<AnimalDTO, Integer> {
 
     @Override
     public void delete(Context ctx) {
+        int id = ctx.pathParamAsClass("id", Integer.class)
+                .check(this::validatePrimaryKey, "Not a valid id")
+                .get();
 
+        animalDAO.delete(id);
+        ctx.res().setStatus(204);
     }
 
     @Override
     public boolean validatePrimaryKey(Integer integer) {
-        return false;
+        return animalDAO.validatePrimaryKey(integer);
     }
 
     @Override
     public AnimalDTO validateEntity(Context ctx) {
-        return null;
+        return ctx.bodyValidator(AnimalDTO.class)
+                .check(a -> a.getAnimalName() != null && !a.getAnimalName().isEmpty(), "Animal name must be set")
+                .check(a -> a.getAnimalAge() > 0, "Animal age must be greater than zero")
+                .get();
     }
 }
 
