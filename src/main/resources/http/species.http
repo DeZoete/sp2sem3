@@ -1,0 +1,44 @@
+// Zoo
+
+GET http://localhost:7070/api/v1/species
+
+###
+
+GET http://localhost:7070/api/v1/species/1
+
+###
+
+POST http://localhost:7070/api/v1/species
+Content-Type: application/json
+
+{
+  "speciesName": "Løve",
+  "diet": "steak",
+  "habitat": "Savanne"
+}
+
+###
+
+PUT http://localhost:7070/api/v1/species/1
+Content-Type: application/json
+
+{
+  "speciesName": "abe",
+  "diet": "banan",
+  "habitat": "træ"
+}
+
+###
+
+DELETE http://localhost:7070/api/v1/species/2
+
+###
+
+GET http://localhost:7070/api/v1/species/1/animals
+
+###
+
+GET http://localhost:7070/api/v1/species/2/species
+
+###
+GET http://localhost:7070/api/v1/species/get

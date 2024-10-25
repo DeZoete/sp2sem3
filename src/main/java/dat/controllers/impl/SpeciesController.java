@@ -1,15 +1,22 @@
 package dat.controllers.impl;
 
+import dat.config.HibernateConfig;
 import dat.controllers.IController;
 import dat.daos.impl.SpeciesDAO;
 import dat.dtos.SpeciesDTO;
 import io.javalin.http.Context;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 
 import java.util.List;
 
 public class SpeciesController implements IController<SpeciesDTO, Integer>{
 
     private SpeciesDAO speciesDAO;
+    public  SpeciesController() {
+        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory("animal");
+        this.speciesDAO =SpeciesDAO.getInstance(emf);
+    }
     @Override
     public void read(Context ctx) {
         {
@@ -54,11 +61,17 @@ public class SpeciesController implements IController<SpeciesDTO, Integer>{
 
     @Override
     public boolean validatePrimaryKey(Integer integer) {
-        return false;
+        return speciesDAO.validatePrimaryKey(integer);
     }
 
     @Override
     public SpeciesDTO validateEntity(Context ctx) {
-        return null;
+        return ctx.bodyValidator(SpeciesDTO.class)
+                .check(s-> s.getSpeciesName() != null && !s.getSpeciesName().isEmpty(), "Species name must e set")
+                .check(s-> s.getHabitat() != null && !s.getHabitat().isEmpty(), "Species habitat must be set")
+                .check(s-> s.getDiet() != null && !s.getDiet().isEmpty(), "Species diet must be set")
+                .get();
+
+        }
     }
-}
+

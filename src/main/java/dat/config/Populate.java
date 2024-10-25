@@ -10,18 +10,18 @@ import java.util.Set;
 
 public class Populate {
 
-    public static void main(String[] args) {
+    public static void Poulate() {
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory("animal");
 
         try (var em = emf.createEntityManager()) {
             em.getTransaction().begin();
 
             // Create species
-            Species lion = new Species("Lion", "Carnivore", "Savannah",1);
-            Species tiger = new Species("Tiger", "Carnivore", "Forest",2);
-            Species elephant = new Species("Elephant", "Herbivore", "Savannah",3);
-            Species giraffe = new Species("Giraffe", "Herbivore", "Savannah",4);
-            Species zebra = new Species("Zebra", "Herbivore", "Savannah",5);
+            Species lion = new Species("Lion", "Carnivore", "Savannah");
+            Species tiger = new Species("Tiger", "Carnivore", "Forest");
+            Species elephant = new Species("Elephant", "Herbivore", "Savannah");
+            Species giraffe = new Species("Giraffe", "Herbivore", "Savannah");
+            Species zebra = new Species("Zebra", "Herbivore", "Savannah");
 
             // Create zoos and animals
             Set<Animal> zoo1Animals = getZoo1Animals();
