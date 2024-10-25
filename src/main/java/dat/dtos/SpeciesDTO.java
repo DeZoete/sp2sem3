@@ -19,7 +19,6 @@ public class SpeciesDTO {
     private String speciesName;
     private String diet;
     private String habitat;
-    private Set<AnimalDTO> animals = new HashSet<>();
 
     public SpeciesDTO(Species species) {
         this.speciesId = species.getSpeciesId();

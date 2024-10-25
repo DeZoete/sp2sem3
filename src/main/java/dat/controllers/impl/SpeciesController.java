@@ -3,13 +3,20 @@ package dat.controllers.impl;
 import dat.controllers.IController;
 import dat.daos.impl.SpeciesDAO;
 import dat.dtos.SpeciesDTO;
+import dat.dtos.ZooDTO;
 import io.javalin.http.Context;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 
 import java.util.List;
 
 public class SpeciesController implements IController<SpeciesDTO, Integer>{
 
     private SpeciesDAO speciesDAO;
+    public  SpeciesController() {
+        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory("animal");
+        this.speciesDAO =SpeciesDAO.getInstance(emf);
+    }
     @Override
     public void read(Context ctx) {
         {
@@ -45,6 +52,14 @@ public class SpeciesController implements IController<SpeciesDTO, Integer>{
         ctx.json(speciesDTO, SpeciesDTO.class);
     }
 
+    public void readAllZoos(Context ctx) {
+        int id = ctx.pathParamAsClass("id", Integer.class).check(this::validatePrimaryKey, "Not a valid id").get();
+        List<ZooDTO> zooDTOS = speciesDAO.readAllZoos(id);
+        ctx.res().setStatus(200);
+        ctx.json(zooDTOS, ZooDTO.class);
+
+    }
+
     @Override
     public void delete(Context ctx) {
         int id = ctx.pathParamAsClass("id", Integer.class).check(this::validatePrimaryKey, "Not a valid id").get();
@@ -66,3 +81,4 @@ public class SpeciesController implements IController<SpeciesDTO, Integer>{
                 .get();
     }
 }
+
