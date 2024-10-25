@@ -3,6 +3,7 @@ package dat.daos.impl;
 import dat.daos.IDAO;
 import dat.dtos.AnimalDTO;
 import dat.dtos.SpeciesDTO;
+import dat.dtos.ZooDTO;
 import dat.entities.Species;
 import dat.entities.Zoo;
 import jakarta.persistence.EntityManager;
@@ -71,16 +72,7 @@ public class SpeciesDAO implements IDAO<SpeciesDTO, Integer> {
             em.getTransaction().commit();
         }
     }
-    public List<AnimalDTO> getAnimalsBySpeciesId(Integer speciesId) {
-        try (EntityManager em = emf.createEntityManager()) {
-            // Query to retrieve animals by species ID
-            TypedQuery<AnimalDTO> query = em.createQuery(
-                    "SELECT new dat.dtos.AnimalDTO(a) FROM Animal a WHERE a.speciesId = :speciesId",
-                    AnimalDTO.class);
-            query.setParameter("speciesId", speciesId); // Setting the species ID parameter
-            return query.getResultList(); // Returning the list of AnimalDTOs
-        }
-    }
+
 /*
     public Zoo getZooBySpeciesId(Integer speciesId) {
         try (EntityManager em = emf.createEntityManager()) {
@@ -90,6 +82,18 @@ public class SpeciesDAO implements IDAO<SpeciesDTO, Integer> {
             return species != null ? species.getZoo() : null; // Change to species.getZoo() for Zoo object
         }
     }*/
+
+    public List<ZooDTO> readAllZoos(Integer speciesId) {
+        try (EntityManager em = emf.createEntityManager()) {
+            // Query to retrieve all zoos by species ID
+            TypedQuery<ZooDTO> query = em.createQuery(
+                    "SELECT DISTINCT new dat.dtos.ZooDTO(z) FROM Zoo z WHERE z.zooId IN (SELECT a.zoo.id FROM Animal a WHERE a.speciesId = :speciesId)",
+                    ZooDTO.class);
+            query.setParameter("speciesId", speciesId);// Setting the species ID parameter
+            return query.getResultList(); // Returning the list of ZooDTOs
+        }
+
+    }
 
     public boolean validatePrimaryKey(Integer id) {
         try (EntityManager em = emf.createEntityManager()) {

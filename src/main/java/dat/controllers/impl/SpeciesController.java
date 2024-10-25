@@ -4,6 +4,7 @@ import dat.config.HibernateConfig;
 import dat.controllers.IController;
 import dat.daos.impl.SpeciesDAO;
 import dat.dtos.SpeciesDTO;
+import dat.dtos.ZooDTO;
 import io.javalin.http.Context;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -50,6 +51,14 @@ public class SpeciesController implements IController<SpeciesDTO, Integer>{
         SpeciesDTO speciesDTO = speciesDAO.update(id, validateEntity(ctx));
         ctx.res().setStatus(200);
         ctx.json(speciesDTO, SpeciesDTO.class);
+    }
+
+    public void readAllZoos(Context ctx) {
+        int id = ctx.pathParamAsClass("id", Integer.class).check(this::validatePrimaryKey, "Not a valid id").get();
+        List<ZooDTO> zooDTOS = speciesDAO.readAllZoos(id);
+        ctx.res().setStatus(200);
+        ctx.json(zooDTOS, ZooDTO.class);
+
     }
 
     @Override
