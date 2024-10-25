@@ -34,7 +34,7 @@ public class UserDTO{
         this.role = role;
     }
 
-    public static List<UserDTO> toUserDTOList(List<User> Users) {
-        return Users.stream().map(UserDTO::new).collect(Collectors.toList());
+    public static List<UserDTO> toUserDTOList(List<User> users) {
+        return users.stream().map(UserDTO::new).collect(Collectors.toList());
     }
 }
