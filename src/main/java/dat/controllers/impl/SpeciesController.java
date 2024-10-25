@@ -54,11 +54,15 @@ public class SpeciesController implements IController<SpeciesDTO, Integer>{
 
     @Override
     public boolean validatePrimaryKey(Integer integer) {
-        return false;
+        return speciesDAO.validatePrimaryKey(integer);
     }
 
     @Override
     public SpeciesDTO validateEntity(Context ctx) {
-        return null;
+        return ctx.bodyValidator(SpeciesDTO.class)
+                .check( s -> s.getSpeciesName() != null && !s.getSpeciesName().isEmpty(), "Species name must be set")
+                .check( s -> s.getDiet() != null && !s.getDiet().isEmpty(), "Species diet must be set")
+                .check( s -> s.getHabitat() != null && !s.getHabitat().isEmpty(), "Hotel type must be set")
+                .get();
     }
 }
