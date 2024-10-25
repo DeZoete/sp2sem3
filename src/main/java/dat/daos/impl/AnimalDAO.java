@@ -41,10 +41,10 @@ public class AnimalDAO {
         }
 
 
-        public AnimalDTO create(AnimalDTO AnimalDTO) {
+        public AnimalDTO create(AnimalDTO animalDTO) {
             try (EntityManager em = emf.createEntityManager()) {
                 em.getTransaction().begin();
-                Animal Animal = new Animal(AnimalDTO);
+                Animal Animal = new Animal(animalDTO);
                 em.persist(Animal);
                 em.getTransaction().commit();
                 return new AnimalDTO(Animal);
@@ -54,12 +54,12 @@ public class AnimalDAO {
 
 
 
-            public AnimalDTO update(Integer integer, AnimalDTO AnimalDTO) {
+            public AnimalDTO update(Integer integer, AnimalDTO animalDTO) {
                 try (EntityManager em = emf.createEntityManager()) {
                     em.getTransaction().begin();
                     Animal h = em.find(Animal.class, integer);
-                    h.setAnimalAge(AnimalDTO.getAnimalAge());
-                    h.setAnimalName(AnimalDTO.getAnimalName());
+                    h.setAnimalAge(animalDTO.getAnimalAge());
+                    h.setAnimalName(animalDTO.getAnimalName());
                     Animal mergedAnimal = em.merge(h);
                     em.getTransaction().commit();
                     return mergedAnimal != null ? new AnimalDTO(mergedAnimal) : null;
