@@ -11,6 +11,7 @@ import java.util.Set;
 
 @Getter
 @NoArgsConstructor
+@Setter
 @Entity
 @Table(name = "zoo")
 public class Zoo {

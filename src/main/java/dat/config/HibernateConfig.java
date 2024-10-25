@@ -85,7 +85,7 @@ public class HibernateConfig {
         return props;
     }
     private static Properties setTestProperties(Properties props){
-//        props.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+       props.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
         props.put("hibernate.connection.driver_class", "org.testcontainers.jdbc.ContainerDatabaseDriver");
         props.put("hibernate.connection.url", "jdbc:tc:postgresql:15.3-alpine3.18:///test_db");
         props.put("hibernate.connection.username", "postgres");

@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor
+@Setter
 public class SpeciesDTO {
 
     private int speciesId;
