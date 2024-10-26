@@ -38,11 +38,4 @@ GET http://localhost:7070/api/v1/species/1/animals
 
 ###
 
-GET http://localhost:7070/api/v1/species/2/species
-
-###
-GET http://localhost:7070/api/v1/species/get
-
-###
-
 GET http://localhost:7070/api/v1/species/2/zoo

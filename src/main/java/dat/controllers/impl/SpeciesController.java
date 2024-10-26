@@ -1,7 +1,9 @@
 package dat.controllers.impl;
 
+import dat.config.HibernateConfig;
 import dat.controllers.IController;
 import dat.daos.impl.SpeciesDAO;
+import dat.dtos.AnimalDTO;
 import dat.dtos.SpeciesDTO;
 import dat.dtos.ZooDTO;
 import io.javalin.http.Context;
@@ -58,6 +60,13 @@ public class SpeciesController implements IController<SpeciesDTO, Integer>{
         ctx.res().setStatus(200);
         ctx.json(zooDTOS, ZooDTO.class);
 
+    }
+
+    public void readAllAnimals(Context ctx) {
+        int id = ctx.pathParamAsClass("id", Integer.class).check(this::validatePrimaryKey, "Not a valid id").get();
+        List<AnimalDTO> animalDTOS = speciesDAO.readAllAnimals(id);
+        ctx.res().setStatus(200);
+        ctx.json(animalDTOS, AnimalDTO.class);
     }
 
     @Override
