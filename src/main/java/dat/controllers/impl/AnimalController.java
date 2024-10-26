@@ -4,6 +4,7 @@ import dat.controllers.IController;
 import dat.daos.impl.AnimalDAO;
 import dat.dtos.AnimalDTO;
 import dat.dtos.SpeciesDTO;
+import dat.dtos.ZooDTO;
 import io.javalin.http.Context;
 
 
@@ -56,6 +57,19 @@ public class AnimalController implements IController<AnimalDTO, Integer> {
         animalDAO.delete(id);
         ctx.res().setStatus(204);
     }
+    public void getZooByAnimalId(Context ctx) {
+        int id = ctx.pathParamAsClass("id", Integer.class).check(this::validatePrimaryKey, "Not a valid id").get();
+        ZooDTO zooDTO = new ZooDTO(animalDAO.getZooByAnimalId(id));
+
+        if (zooDTO != null) {
+            ctx.res().setStatus(200);
+            ctx.json(zooDTO);
+        } else {
+            ctx.res().setStatus(404);
+            ctx.json("Zoo not found for the given animal ID.");
+        }
+    }
+
 
     @Override
     public boolean validatePrimaryKey(Integer integer) {

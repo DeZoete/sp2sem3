@@ -1,0 +1,45 @@
+// Animal Endpoints
+
+# Retrieve all animals
+GET http://localhost:7070/api/v1/animals
+
+###
+
+# Retrieve an animal by ID
+GET http://localhost:7070/api/v1/animals/1
+
+###
+
+# Create a new animal
+POST http://localhost:7070/api/v1/animals
+Content-Type: application/json
+
+{
+  "animalName": "Lion",
+  "animalAge": 4,
+  "speciesId": 1,
+  "zooId": 2
+}
+
+###
+
+# Update an existing animal
+PUT http://localhost:7070/api/v1/animals/1
+Content-Type: application/json
+
+{
+  "animalName": "Lion",
+  "animalAge": 5,
+  "speciesId": 1,
+  "zooId": 2
+}
+
+###
+
+# Delete an animal by ID
+DELETE http://localhost:7070/api/v1/animals/1
+
+###
+
+# Retrieve the zoo associated with a specific animal
+GET http://localhost:7070/api/v1/animals/1/zoo

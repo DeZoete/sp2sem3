@@ -78,12 +78,6 @@ public class AnimalDAO {
                 em.getTransaction().commit();
             }
         }
-    public AnimalDTO readById(Integer id) {
-        try (EntityManager em = emf.createEntityManager()) {
-            Animal animal = em.find(Animal.class, id); // Retrieve the animal
-            return animal != null ? new AnimalDTO(animal) : null;
-        }
-    }
 
     public Zoo getZooByAnimalId(Integer animalId) {
         try (EntityManager em = emf.createEntityManager()) {
