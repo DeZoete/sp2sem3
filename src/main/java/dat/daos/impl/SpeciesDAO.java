@@ -73,15 +73,17 @@ public class SpeciesDAO implements IDAO<SpeciesDTO, Integer> {
         }
     }
 
-/*
-    public Zoo getZooBySpeciesId(Integer speciesId) {
+    public List<AnimalDTO> readAllAnimals(Integer speciesId) {
         try (EntityManager em = emf.createEntityManager()) {
-            // Retrieve the species by its ID
-            Species species = em.find(Species.class, speciesId);
-            // Return the Zoo object associated with the species or null if not found
-            return species != null ? species.getZoo() : null; // Change to species.getZoo() for Zoo object
+            // Simplified query to retrieve all animals by species ID
+            TypedQuery<AnimalDTO> query = em.createQuery(
+                    "SELECT new dat.dtos.AnimalDTO(a) FROM Animal a WHERE a.speciesId = :speciesId",
+                    AnimalDTO.class);
+            query.setParameter("speciesId", speciesId); // Setting the species ID parameter
+            return query.getResultList(); // Returning the list of AnimalDTOs
         }
-    }*/
+    }
+
 
     public List<ZooDTO> readAllZoos(Integer speciesId) {
         try (EntityManager em = emf.createEntityManager()) {
