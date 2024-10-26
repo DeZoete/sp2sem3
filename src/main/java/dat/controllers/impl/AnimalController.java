@@ -1,11 +1,14 @@
 package dat.controllers.impl;
 
+import dat.config.HibernateConfig;
 import dat.controllers.IController;
 import dat.daos.impl.AnimalDAO;
+import dat.daos.impl.ZooDAO;
 import dat.dtos.AnimalDTO;
 import dat.dtos.SpeciesDTO;
 import dat.dtos.ZooDTO;
 import io.javalin.http.Context;
+import jakarta.persistence.EntityManagerFactory;
 
 
 import java.util.List;
@@ -14,6 +17,13 @@ import java.util.List;
 
 public class AnimalController implements IController<AnimalDTO, Integer> {
     private AnimalDAO animalDAO;
+    private ZooDAO zooDAO;
+
+    public AnimalController() {
+        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory("animal");
+        this.animalDAO = AnimalDAO.getInstance(emf);
+        this.zooDAO = ZooDAO.getInstance(emf);
+    }
 
     @Override
     public void read(Context ctx) {
@@ -33,8 +43,9 @@ public class AnimalController implements IController<AnimalDTO, Integer> {
 
     @Override
     public void create(Context ctx) {
+        int zooId = ctx.pathParamAsClass("id", Integer.class).check(this::validateZooPrimaryKey, "Not a valid id").get();
         AnimalDTO jsonRequest = ctx.bodyAsClass(AnimalDTO.class); // Get the incoming JSON as AnimalDTO
-        AnimalDTO animalDTO = animalDAO.create(jsonRequest); // Create the animal
+        AnimalDTO animalDTO = animalDAO.create(jsonRequest,zooId); // Create the animal
         ctx.res().setStatus(201); // Set the response status to Created
         ctx.json(animalDTO); // Send back the created animal as JSON
     }
@@ -83,5 +94,10 @@ public class AnimalController implements IController<AnimalDTO, Integer> {
                 .check(a -> a.getAnimalAge() > 0, "Animal age must be greater than zero")
                 .get();
     }
+
+    public boolean validateZooPrimaryKey(Integer integer) {
+        return zooDAO.validatePrimaryKey(integer);
+    }
+
 }
 

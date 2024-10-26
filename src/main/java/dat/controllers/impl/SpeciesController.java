@@ -1,5 +1,6 @@
 package dat.controllers.impl;
 
+import dat.config.HibernateConfig;
 import dat.controllers.IController;
 import dat.daos.impl.SpeciesDAO;
 import dat.dtos.SpeciesDTO;
