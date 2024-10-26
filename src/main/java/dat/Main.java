@@ -11,6 +11,5 @@ public class Main {
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory("animal");
        // Populate.Poulate();
         ApplicationConfig.startServer(7070);
-
     }
 }
