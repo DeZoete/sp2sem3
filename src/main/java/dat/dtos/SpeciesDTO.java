@@ -33,7 +33,4 @@ public class SpeciesDTO {
         this.habitat = habitat;
     }
 
-    public static List<SpeciesDTO> toSpeciesDTOList(List<Species> speciesList) {
-        return speciesList.stream().map(SpeciesDTO::new).collect(Collectors.toList());
-    }
 }

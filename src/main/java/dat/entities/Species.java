@@ -35,7 +35,6 @@ public class Species {
     }
 
     public Species(SpeciesDTO speciesDTO) {
-        this.speciesId = speciesDTO.getSpeciesId();
         this.speciesName = speciesDTO.getSpeciesName();
         this.diet = speciesDTO.getDiet();
         this.habitat = speciesDTO.getHabitat();

@@ -49,5 +49,6 @@ public class Animal {
         this.animalId = animalDTO.getAnimalId();
         this.animalName = animalDTO.getAnimalName();
         this.animalAge = animalDTO.getAnimalAge();
+        this.speciesId = animalDTO.getSpeciesId();
     }
 }

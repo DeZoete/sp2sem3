@@ -41,13 +41,16 @@ public class AnimalDAO {
         }
 
 
-        public AnimalDTO create(AnimalDTO animalDTO) {
+        public AnimalDTO create(AnimalDTO animalDTO, Integer zooId) {
             try (EntityManager em = emf.createEntityManager()) {
                 em.getTransaction().begin();
-                Animal Animal = new Animal(animalDTO);
-                em.persist(Animal);
+                Zoo zoo = em.find(Zoo.class, zooId);
+                Animal animal = new Animal(animalDTO);
+                zoo.addAnimal(animal);
+                em.merge(zoo);
+                em.persist(animal);
                 em.getTransaction().commit();
-                return new AnimalDTO(Animal);
+                return new AnimalDTO(animal);
             }
         }
 

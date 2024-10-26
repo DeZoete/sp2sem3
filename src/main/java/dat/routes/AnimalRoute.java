@@ -10,11 +10,12 @@ public class AnimalRoute {
     protected EndpointGroup getRoutes() {
 
         return () -> {
-            post("/", animalController::create);
+            post("/zoo/{id}", animalController::create);
             get("/", animalController::readAll);
             get("/{id}", animalController::read);
             put("/{id}", animalController::update);
             delete("/{id}", animalController::delete);
+            get("/{id}/zoo", animalController::getZooByAnimalId);
         };
     }
 
