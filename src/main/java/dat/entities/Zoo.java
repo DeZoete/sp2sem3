@@ -31,7 +31,7 @@ public class Zoo {
     @Column(name = "zoo_location", nullable = false, unique = true)
     private String zooLocation;
 
-    @OneToMany(mappedBy = "zoo", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "zoo", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private Set<Animal> animals = new HashSet<>();
 
     public Zoo(String name, String location) {

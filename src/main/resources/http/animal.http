@@ -6,7 +6,7 @@ GET http://localhost:7070/api/v1/animals
 ###
 
 # Retrieve an animal by ID
-GET http://localhost:7070/api/v1/animals/1
+GET http://localhost:7070/api/v1/animals/7
 
 ###
 
@@ -15,7 +15,7 @@ POST http://localhost:7070/api/v1/animals/zoo/4
 Content-Type: application/json
 
 {
-  "animalName": "Lion355524",
+  "animalName": "Lion386y7824",
   "animalAge": 4,
   "speciesId": 1
 }
@@ -23,20 +23,20 @@ Content-Type: application/json
 ###
 
 # Update an existing animal
-PUT http://localhost:7070/api/v1/animals/1
+PUT http://localhost:7070/api/v1/animals/11
 Content-Type: application/json
 
 {
-  "animalName": "Lion",
+  "animalName": "Ib",
   "animalAge": 5
 }
 
 ###
 
 # Delete an animal by ID
-DELETE http://localhost:7070/api/v1/animals/4
+DELETE http://localhost:7070/api/v1/animals/11
 
 ###
 
 # Retrieve the zoo associated with a specific animal
-GET http://localhost:7070/api/v1/animals/7/zoo
+GET http://localhost:7070/api/v1/animals/10/zoo

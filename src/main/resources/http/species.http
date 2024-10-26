@@ -12,14 +12,14 @@ POST http://localhost:7070/api/v1/species
 Content-Type: application/json
 
 {
-  "speciesName": "Løve",
+  "speciesName": "Panda2",
   "diet": "steak",
   "habitat": "Savanne"
 }
 
 ###
 
-PUT http://localhost:7070/api/v1/species/1
+PUT http://localhost:7070/api/v1/species/8
 Content-Type: application/json
 
 {
@@ -30,11 +30,11 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:7070/api/v1/species/2
+DELETE http://localhost:7070/api/v1/species/8
 
 ###
 
-GET http://localhost:7070/api/v1/species/1/animals
+GET http://localhost:7070/api/v1/species/2/animals
 
 ###
 
