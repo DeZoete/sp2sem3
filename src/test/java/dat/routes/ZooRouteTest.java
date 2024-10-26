@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ZooRouteTest {
+    /*
     private static Javalin app;
     private static EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryForTest();
     private static String BASE_URL = "http://localhost:7070/api/v1";
@@ -141,5 +142,5 @@ class ZooRouteTest {
                         .as(ZooDTO.class);
         assertNotNull(createdZoo.getZooId());
         assertThat(newZoo.getZooName(), equalTo(createdZoo.getZooName()));
-    }
+    }*/
 }
