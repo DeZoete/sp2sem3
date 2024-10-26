@@ -1,5 +1,6 @@
-package dat.daos;
+package dat.daos.impl;
 
+import dat.daos.IDAO;
 import dat.dtos.UserDTO;
 import dat.entities.User;
 import jakarta.persistence.EntityManager;
@@ -8,7 +9,7 @@ import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
-public class UserDAO {
+public class UserDAO implements IDAO<UserDTO, Integer> {
 
     private static UserDAO instance;
     private static EntityManagerFactory emf;

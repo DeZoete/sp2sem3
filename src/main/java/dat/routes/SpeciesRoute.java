@@ -18,6 +18,8 @@ public class SpeciesRoute {
             get("/{id}", speciesController::read);
             put("/{id}", speciesController::update);
             delete("/{id}", speciesController::delete);
+            get("/{id}/zoo", speciesController::readAllZoos);
+            get("/{id}/animals", speciesController::readAllAnimals);
         };
     }
 }

@@ -2,30 +2,37 @@ package dat.dtos;
 
 import dat.entities.Zoo;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Getter
+@NoArgsConstructor
 @Setter
 public class ZooDTO {
-    private int id;
-    private String name;
-    private String location;
-    private List<AnimalDTO> animals;
+
+    private int zooId;
+    private String zooName;
+    private String zooLocation;
+    private Set<AnimalDTO> animals = new HashSet<>();
 
     public ZooDTO(Zoo zoo) {
-        this.id = zoo.getId();
-        this.name = zoo.getName();
-        this.location = zoo.getLocation();
-        this.animals = zoo.getAnimals().stream().map(AnimalDTO::new).collect(Collectors.toList());
+        this.zooId = zoo.getZooId();
+        this.zooName = zoo.getZooName();
+        this.zooLocation = zoo.getZooLocation();
+        if (zoo.getAnimals() != null)
+        {
+            zoo.getAnimals().forEach( animal -> animals.add(new AnimalDTO(animal)));
+        }
     }
 
-    public ZooDTO(String name, String location, List<AnimalDTO> animals) {
-        this.name = name;
-        this.location = location;
-        this.animals = animals;
+    public ZooDTO(String name, String location) {
+        this.zooName = name;
+        this.zooLocation = location;
     }
 
     public static List<ZooDTO> toZooDTOList(List<Zoo> zooList) {

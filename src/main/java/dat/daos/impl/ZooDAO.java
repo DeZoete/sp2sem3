@@ -1,14 +1,19 @@
-package dat.daos;
+package dat.daos.impl;
 
+import dat.daos.IDAO;
+import dat.dtos.AnimalDTO;
+import dat.dtos.SpeciesDTO;
 import dat.dtos.ZooDTO;
+import dat.entities.Species;
 import dat.entities.Zoo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ZooDAO {
+public class ZooDAO implements IDAO<ZooDTO, Integer> {
 
     private static ZooDAO instance;
     private static EntityManagerFactory emf;
@@ -45,15 +50,16 @@ public class ZooDAO {
         }
     }
 
-    public ZooDTO update(Integer id, ZooDTO zooDTO) {
+    public ZooDTO update(Integer id, ZooDTO zooDTO){
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
             Zoo zoo = em.find(Zoo.class, id);
-            zoo.setName(zooDTO.getName());
-            zoo.setLocation(zooDTO.getLocation());
-            Zoo mergedZoo = em.merge(zoo);
+            if (zoo != null) {
+                zoo.setZooName(zooDTO.getZooName());
+                zoo.setZooLocation(zooDTO.getZooLocation());
+            }
             em.getTransaction().commit();
-            return mergedZoo != null ? new ZooDTO(mergedZoo) : null;
+            return new ZooDTO(zoo);
         }
     }
 
@@ -74,4 +80,25 @@ public class ZooDAO {
             return zoo != null;
         }
     }
+
+    public List<AnimalDTO> readAllAnimals(Integer id) {
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<AnimalDTO> query = em.createQuery("SELECT new dat.dtos.AnimalDTO(a) FROM Animal a WHERE a.zoo.id = :zooId", AnimalDTO.class);
+            query.setParameter("zooId", id);
+            return query.getResultList();
+        }
+    }
+
+    public List<SpeciesDTO> readAllSpecies(Integer id) {
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<SpeciesDTO> query = em.createQuery(
+                    "SELECT DISTINCT new dat.dtos.SpeciesDTO(s) " +
+                            "FROM Species s " +
+                            "WHERE s.speciesId IN (SELECT a.speciesId FROM Animal a WHERE a.zoo.id = :zooId)", SpeciesDTO.class);
+            query.setParameter("zooId", id);
+            return query.getResultList();
+        }
+    }
+
+
 }

@@ -17,6 +17,8 @@ public class ZooRoute {
             get("/{id}", zooController::read);
             put("/{id}", zooController::update);
             delete("/{id}", zooController::delete);
+            get("/{id}/animals", zooController::readAllAnimals);
+            get("/{id}/species", zooController::readAllSpecies);
         };
     }
 }

@@ -1,12 +1,14 @@
-package dat.daos;
+package dat.daos.impl;
 
+import dat.daos.IDAO;
 import dat.dtos.AnimalDTO;
+import dat.dtos.SpeciesDTO;
 import dat.entities.Animal;
+import dat.entities.Species;
+import dat.entities.Zoo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -39,10 +41,10 @@ public class AnimalDAO {
         }
 
 
-        public AnimalDTO create(AnimalDTO AnimalDTO) {
+        public AnimalDTO create(AnimalDTO animalDTO) {
             try (EntityManager em = emf.createEntityManager()) {
                 em.getTransaction().begin();
-                Animal Animal = new Animal(AnimalDTO);
+                Animal Animal = new Animal(animalDTO);
                 em.persist(Animal);
                 em.getTransaction().commit();
                 return new AnimalDTO(Animal);
@@ -50,19 +52,20 @@ public class AnimalDAO {
         }
 
 
-        public AnimalDTO update(Integer integer, AnimalDTO AnimalDTO) {
-            try (EntityManager em = emf.createEntityManager()) {
-                em.getTransaction().begin();
-                Animal h = em.find(Animal.class, integer);
-                h.setSpeciesId(AnimalDTO.getSpeciesId());
-                h.setAge(AnimalDTO.getAge());
-                h.setName(AnimalDTO.getName());
-                Animal mergedAnimal = em.merge(h);
-                em.getTransaction().commit();
-                return mergedAnimal != null ? new AnimalDTO(mergedAnimal) : null;
+
+
+            public AnimalDTO update(Integer integer, AnimalDTO animalDTO) {
+                try (EntityManager em = emf.createEntityManager()) {
+                    em.getTransaction().begin();
+                    Animal h = em.find(Animal.class, integer);
+                    h.setAnimalAge(animalDTO.getAnimalAge());
+                    h.setAnimalName(animalDTO.getAnimalName());
+                    Animal mergedAnimal = em.merge(h);
+                    em.getTransaction().commit();
+                    return mergedAnimal != null ? new AnimalDTO(mergedAnimal) : null;
+                }
             }
 
-        }
 
 
         public void delete(Integer integer) {
@@ -76,10 +79,18 @@ public class AnimalDAO {
             }
         }
 
+    public Zoo getZooByAnimalId(Integer animalId) {
+        try (EntityManager em = emf.createEntityManager()) {
+            Animal animal = em.find(Animal.class, animalId); // Retrieve the animal
+            return animal != null ? animal.getZoo() : null; // Return the Zoo object or null if not found
+        }
+    }
+
         public boolean validatePrimaryKey(Integer integer) {
             try (EntityManager em = emf.createEntityManager()) {
                 Animal Animal = em.find(Animal.class, integer);
                 return Animal != null;
             }
         }
+
 }

@@ -7,37 +7,47 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
-@Entity
 @NoArgsConstructor
+@Entity
+@Table(name = "animal")
 public class Animal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Setter
-    @Column
-    private int speciesId;
-    @ManyToOne
-    private Zoo zoo;
-    @Setter
-    @Column
-    private String name;
-    @Setter
-    @Column
-    private int age;
+    @Column(name = "animal_id", nullable = false, unique = true)
+    private int animalId;
 
-    public Animal(int speciesId, Zoo zoo, String name, int age) {
+    @Setter
+    @Column(name = "animal_name", nullable = false)
+    private String animalName;
+
+    @Setter
+    @Column(name = "animal_age", nullable = false)
+    private int animalAge;
+
+    @Setter
+    @Column(name = "species_id", nullable = false)
+    private int speciesId;
+
+    @Setter
+    @ManyToOne
+    @JoinColumn(name = "zoo_id", nullable = false)
+    private Zoo zoo;
+
+    public Animal(String animalName, int animalAge) {
+        this.animalName = animalName;
+        this.animalAge = animalAge;
+    }
+
+    public Animal(String animalName, int animalAge, int speciesId) {
+        this.animalName = animalName;
+        this.animalAge = animalAge;
         this.speciesId = speciesId;
-        this.zoo = zoo;
-        this.name = name;
-        this.age = age;
     }
 
     public Animal(AnimalDTO animalDTO) {
-        this.id = animalDTO.getId();
-        this.speciesId = animalDTO.getSpeciesId();
-        this.zoo = animalDTO.getZoo();
-        this.name = animalDTO.getName();
-        this.age = animalDTO.getAge();
+        this.animalId = animalDTO.getAnimalId();
+        this.animalName = animalDTO.getAnimalName();
+        this.animalAge = animalDTO.getAnimalAge();
     }
 }

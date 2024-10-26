@@ -2,34 +2,26 @@ package dat.dtos;
 
 import dat.entities.Animal;
 import dat.entities.Zoo;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Data
 @Getter
 @Setter
+
 public class AnimalDTO {
-    private int id;
-    private int speciesId;
-    private Zoo zoo;
-    private String name;
-    private int age;
+    private int animalId;
+    private String animalName;
+    private int animalAge;
 
     public AnimalDTO(Animal animal) {
-        this.id = animal.getId();
-        this.speciesId = animal.getSpeciesId();
-        this.zoo = animal.getZoo();
-        this.name = animal.getName();
-        this.age = animal.getAge();
-    }
-
-    public AnimalDTO(int speciesId, Zoo zoo, String name, int age) {
-        this.speciesId = speciesId;
-        this.zoo = zoo;
-        this.name = name;
-        this.age = age;
+        this.animalId = animal.getAnimalId();
+        this.animalName = animal.getAnimalName();
+        this.animalAge = animal.getAnimalAge();
     }
 
     public static List<AnimalDTO> toAnimalDTOList(List<Animal> animalList) {

@@ -2,22 +2,26 @@ package dat.dtos;
 
 import dat.entities.Species;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Getter
+@NoArgsConstructor
 @Setter
 public class SpeciesDTO {
 
-    private int id;
+    private int speciesId;
     private String speciesName;
     private String diet;
     private String habitat;
 
     public SpeciesDTO(Species species) {
-        this.id = species.getId();
+        this.speciesId = species.getSpeciesId();
         this.speciesName = species.getSpeciesName();
         this.diet = species.getDiet();
         this.habitat = species.getHabitat();

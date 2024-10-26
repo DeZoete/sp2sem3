@@ -1,0 +1,39 @@
+// Zoo
+
+GET http://localhost:7070/api/v1/zoos
+
+###
+
+GET http://localhost:7070/api/v1/zoos/1
+
+###
+
+POST http://localhost:7070/api/v1/zoos
+Content-Type: application/json
+
+{
+  "zooName": "Roskilde Zoo",
+  "zooLocation": "Roskildevej 32"
+}
+
+###
+
+PUT http://localhost:7070/api/v1/zoos/2
+Content-Type: application/json
+
+{
+  "zooName": "Roskilde Zoo",
+  "zooLocation": "Roskildevej 31"
+}
+
+###
+
+DELETE http://localhost:7070/api/v1/zoos/1
+
+###
+
+GET http://localhost:7070/api/v1/zoos/1/animals
+
+###
+
+GET http://localhost:7070/api/v1/zoos/2/species
