@@ -14,13 +14,21 @@ public class HibernateConfig {
     private static EntityManagerFactory emf;
 
     private static EntityManagerFactory emfTest;
+    private static Boolean isTest = false;
+
+    public static  void setTest(Boolean test){
+        isTest = test;
+    }
+    public static Boolean getTest(){
+        return isTest;
+    }
     public static EntityManagerFactory getEntityManagerFactory(String DBName) {
         if (emf == null)
             emf = createEMF(false, DBName);
         return emf;
     }
     public static EntityManagerFactory getEntityManagerFactoryForTest() {
-        if (emfTest == null)
+        if (emfTest == null||isTest)
             emfTest = createEMF(true,""); //no DB needed for test
         return emfTest;
     }
