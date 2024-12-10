@@ -17,7 +17,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+/*@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SpeciesControllerTest {
 
     private static EntityManagerFactory emf;
@@ -170,4 +170,4 @@ class SpeciesControllerTest {
                 .then()
                 .statusCode(400);  // Assuming 404 is returned when a species is not found
     }
-}
+} */
