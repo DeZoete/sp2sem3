@@ -3,6 +3,7 @@ package dat.config;
 
 import dat.entities.*;
 import dat.security.entities.Role;
+import dat.security.entities.User;
 import jakarta.persistence.EntityManagerFactory;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -37,7 +38,7 @@ public class HibernateConfig {
     private static void getAnnotationConfiguration(Configuration configuration) {
         configuration.addAnnotatedClass(Animal.class);
         configuration.addAnnotatedClass(Species.class);
-        configuration.addAnnotatedClass(dat.security.entities.User.class);
+        configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Zoo.class);
         configuration.addAnnotatedClass(Role.class);
     }

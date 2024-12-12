@@ -1,3 +1,4 @@
+/*
 package dat.daos.impl;
 
 import dat.daos.IDAO;
@@ -77,3 +78,5 @@ public class UserDAO implements IDAO<UserDTO, Integer> {
         }
     }
 }
+
+ */

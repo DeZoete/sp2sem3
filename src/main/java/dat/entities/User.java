@@ -1,3 +1,4 @@
+/*
 package dat.entities;
 
 import dat.dtos.UserDTO;
@@ -40,3 +41,5 @@ public class User {
         this.role = userDTO.getRole();
     }
 }
+
+ */

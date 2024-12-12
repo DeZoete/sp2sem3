@@ -1,3 +1,4 @@
+/*
 package dat.dtos;
 
 import dat.entities.Role;
@@ -38,3 +39,4 @@ public class UserDTO{
         return users.stream().map(UserDTO::new).collect(Collectors.toList());
     }
 }
+   */

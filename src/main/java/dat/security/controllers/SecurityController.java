@@ -3,7 +3,6 @@ package dat.security.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.nimbusds.jose.JOSEException;
-import dat.utils.Utils;
 import dat.config.HibernateConfig;
 import dat.security.daos.ISecurityDAO;
 import dat.security.daos.SecurityDAO;
@@ -11,10 +10,10 @@ import dat.security.entities.User;
 import dat.security.exceptions.ApiException;
 import dat.security.exceptions.NotAuthorizedException;
 import dat.security.exceptions.ValidationException;
+import dat.utils.Utils;
 import dk.bugelhartmann.ITokenSecurity;
 import dk.bugelhartmann.TokenSecurity;
 import dk.bugelhartmann.UserDTO;
-import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.javalin.http.HttpStatus;
 import io.javalin.http.UnauthorizedResponse;
@@ -46,7 +45,7 @@ public class SecurityController implements ISecurityController {
         if (instance == null) {
             instance = new SecurityController();
         }
-        securityDAO = new SecurityDAO(HibernateConfig.getEntityManagerFactory("animal"));
+        securityDAO = new SecurityDAO(HibernateConfig.getEntityManagerFactory("hotels"));
         return instance;
     }
 
@@ -169,7 +168,7 @@ public class SecurityController implements ISecurityController {
             } else {
                 throw new NotAuthorizedException(403, "Token is not valid");
             }
-        } catch (ParseException | JOSEException | NotAuthorizedException | ApiException e) {
+        } catch (ParseException | JOSEException | NotAuthorizedException e) {
             e.printStackTrace();
             throw new ApiException(HttpStatus.UNAUTHORIZED.getCode(), "Unauthorized. Could not verify token");
         }
@@ -186,13 +185,9 @@ public class SecurityController implements ISecurityController {
                 User updatedUser = securityDAO.addRole(user, newRole);
                 ctx.status(200).json(returnObject.put("msg", "Role " + newRole + " added to user"));
             } catch (EntityNotFoundException e) {
-                ctx.status(404).json("{\"msg\": \"User not found\"}");
+                ctx.status(404).json(returnObject.put("msg", "User not found"));
             }
         };
     }
 
-    // Health check for the API. Used in deployment
-    public void healthCheck(@NotNull Context ctx) {
-        ctx.status(200).json("{\"msg\": \"API is up and running\"}");
-    }
 }

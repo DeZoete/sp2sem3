@@ -1,20 +1,22 @@
 ### A simple get request to the test endpoint. No need for login
 GET {{url}}/auth/test/
-
-### Create a new user - this one will only get a USER role by default
+### Create a new user - this one will get the specified role
 POST {{url}}/auth/register/
+Accept: application/json
 
 {
-    "username": "user",
-    "password": "test123"
+    "username": "admin1",
+    "password": "test123",
+
 }
 
 ###
 POST {{url}}/auth/login/
 
 {
-    "username": "user",
+    "username": "admin",
     "password": "test123"
+
 }
 
 > {%
