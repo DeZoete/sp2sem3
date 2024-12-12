@@ -3,6 +3,7 @@ package dat.config;
 import dat.controllers.impl.ExceptionController;
 import dat.exceptions.ApiException;
 import dat.routes.Routes;
+import dat.security.routes.SecurityRoutes;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
 import jakarta.persistence.EntityManagerFactory;
@@ -28,8 +29,13 @@ public class ApplicationConfig {
         config.http.defaultContentType = "application/json"; // default content type for requests
         config.router.apiBuilder(routes.getRoutes());
 
+        config.router.apiBuilder(SecurityRoutes.getSecuredRoutes());
+        config.router.apiBuilder(SecurityRoutes.getSecurityRoutes());
+
         // Plugins
         config.bundledPlugins.enableRouteOverview("/routes"); // enables route overview at /routes
+
+
     }
 
     public static String getProperty(String propName) throws IOException

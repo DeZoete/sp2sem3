@@ -16,6 +16,7 @@ public class Routes {
             path("/animals", animalRoute.getRoutes());
             path("/species", speciesRoute.getRoutes());
             path("/zoos", zooRoute.getRoutes());
+
         };
     }
 }
