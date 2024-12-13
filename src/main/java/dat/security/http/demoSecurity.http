@@ -5,9 +5,9 @@ GET {{url}}/auth/test/
 POST {{url}}/auth/register/
 
 {
-    "username": "user3",
-    "password": "lkjglasjg",
-    "roles": ["admin"]
+    "username": "user5",
+    "password": "user5"
+
 }
 
 ###
