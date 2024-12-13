@@ -6,6 +6,7 @@ import dat.routes.Routes;
 import dat.security.routes.SecurityRoutes;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
+import io.javalin.http.Context;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
@@ -51,14 +52,33 @@ public class ApplicationConfig {
         }
     }
 
+    private static void corsHeaders(Context ctx) {
+        ctx.header("Access-Control-Allow-Origin", "*");
+        ctx.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        ctx.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        ctx.header("Access-Control-Allow-Credentials", "true");
+    }
+
+    private static void corsHeadersOptions(Context ctx) {
+        ctx.header("Access-Control-Allow-Origin", "*");
+        ctx.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        ctx.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        ctx.header("Access-Control-Allow-Credentials", "true");
+        ctx.status(204);
+    }
+
+
     public static Javalin startServer(int port) {
         routes = new Routes();
         var app = Javalin.create(ApplicationConfig::configuration);
         app.exception(ApiException.class, exceptionController::apiExceptionHandler);
         app.exception(Exception.class, exceptionController::exceptionHandler);
+        app.before(ApplicationConfig::corsHeaders);
+        app.options("/*", ApplicationConfig::corsHeadersOptions);
         app.start(port);
         return app;
     }
+
 
     public static void stopServer(Javalin app) {
         app.stop();
